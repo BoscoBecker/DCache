@@ -35,13 +35,11 @@ implementation
 { TCache }
 
 function TCache.CalculatetHash(DataSet: TDataSet): String;
-var
-  LDataString: TStringBuilder;
 begin
   if not DataSet.Active then raise Exception.Create('Dataset is not active');
   if DataSet.IsEmpty  then Exit;
 
-  LDataString:= TStringBuilder.Create;
+  var LDataString:= TStringBuilder.Create;
   try
     LDataString.Clear;
     DataSet.DisableControls;

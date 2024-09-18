@@ -1,6 +1,7 @@
 object Form3: TForm3
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'DCache - Cache for DataSet '
   ClientHeight = 645
   ClientWidth = 878
@@ -1399,7 +1400,7 @@ object Form3: TForm3
     ParentFont = False
   end
   object ImgRAD: TImage
-    Left = 569
+    Left = 561
     Top = 56
     Width = 144
     Height = 127
@@ -16588,8 +16589,8 @@ object Form3: TForm3
       ParentFont = False
     end
     object lblInfo: TLabel
-      Left = 640
-      Top = 32
+      Left = 608
+      Top = 27
       Width = 97
       Height = 21
       Caption = 'Not Modified'
@@ -16600,6 +16601,32 @@ object Form3: TForm3
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold, fsItalic]
       ParentColor = False
+      ParentFont = False
+    end
+    object LblGender: TLabel
+      Left = 288
+      Top = 33
+      Width = 42
+      Height = 15
+      Caption = 'Gender'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblAge: TLabel
+      Left = 462
+      Top = 33
+      Width = 22
+      Height = 15
+      Caption = 'Age'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
       ParentFont = False
     end
     object DBGrid: TDBGrid
@@ -16619,13 +16646,27 @@ object Form3: TForm3
         item
           Expanded = False
           FieldName = 'id'
+          Title.Caption = 'Id'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nome'
           Title.Caption = 'Name'
-          Width = 728
+          Width = 414
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Sexo'
+          Title.Caption = 'Gender'
+          Width = 253
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Idade'
+          Title.Caption = 'Age'
           Visible = True
         end>
     end
@@ -16640,8 +16681,9 @@ object Form3: TForm3
     object DBName: TDBEdit
       Left = 56
       Top = 30
-      Width = 521
+      Width = 209
       Height = 23
+      Hint = 'Your name'
       DataField = 'nome'
       DataSource = dsGrid
       TabOrder = 2
@@ -16655,9 +16697,37 @@ object Form3: TForm3
       TabOrder = 3
       OnClick = btnOpenQueryClick
     end
+    object DBGender: TDBEdit
+      Left = 336
+      Top = 30
+      Width = 81
+      Height = 23
+      Hint = 'Your gender'
+      DataField = 'Sexo'
+      DataSource = dsGrid
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+    end
+    object DBAge: TDBEdit
+      Left = 490
+      Top = 30
+      Width = 81
+      Height = 23
+      Hint = 'Your age'
+      DataField = 'Idade'
+      DataSource = dsGrid
+      MaxLength = 3
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+    end
   end
   object Connection: TFDConnection
     Params.Strings = (
+      
+        'Database=D:\Projetos\Delphi\DCache\src\Sample\Win32\Debug\data\D' +
+        'B.db'
       'DriverID=SQLite')
     LoginPrompt = False
     Left = 824

@@ -16539,7 +16539,7 @@ object Form3: TForm3
     Left = 721
     Top = -14
     Width = 48
-    Height = 225
+    Height = 212
     Caption = '}'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -16571,10 +16571,6 @@ object Form3: TForm3
     Align = alClient
     Caption = 'Add new name or remove'
     TabOrder = 0
-    ExplicitLeft = 278
-    ExplicitTop = 366
-    ExplicitWidth = 185
-    ExplicitHeight = 105
     object Nome: TLabel
       Left = 16
       Top = 33

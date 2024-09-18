@@ -76,7 +76,10 @@ begin
   Connection.Params.Database:= GetPathDataBase;
   Connection.Connected:= True;
   QueryGrid.Open();
-  TCache.GetInstance.SetDataSet(True, QueryGrid);
+
+  TCache
+    .GetInstance
+      .SetDataSet(True, QueryGrid);
 end;
 
 function TForm3.GetPathDataBase: String;
