@@ -16589,8 +16589,8 @@ object Form3: TForm3
       ParentFont = False
     end
     object lblInfo: TLabel
-      Left = 640
-      Top = 32
+      Left = 608
+      Top = 27
       Width = 97
       Height = 21
       Caption = 'Not Modified'
@@ -16603,7 +16603,7 @@ object Form3: TForm3
       ParentColor = False
       ParentFont = False
     end
-    object Label5: TLabel
+    object LblGender: TLabel
       Left = 288
       Top = 33
       Width = 42
@@ -16616,7 +16616,7 @@ object Form3: TForm3
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label6: TLabel
+    object lblAge: TLabel
       Left = 462
       Top = 33
       Width = 22
@@ -16697,7 +16697,7 @@ object Form3: TForm3
       TabOrder = 3
       OnClick = btnOpenQueryClick
     end
-    object DBEdit1: TDBEdit
+    object DBGender: TDBEdit
       Left = 336
       Top = 30
       Width = 81
@@ -16709,7 +16709,7 @@ object Form3: TForm3
       ShowHint = True
       TabOrder = 4
     end
-    object DBEdit2: TDBEdit
+    object DBAge: TDBEdit
       Left = 490
       Top = 30
       Width = 81

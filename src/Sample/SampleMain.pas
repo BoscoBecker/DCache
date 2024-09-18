@@ -32,16 +32,14 @@ type
     DBNavigator: TDBNavigator;
     DBName: TDBEdit;
     btnOpenQuery: TButton;
-    DBEdit1: TDBEdit;
-    Label5: TLabel;
-    DBEdit2: TDBEdit;
-    Label6: TLabel;
+    DBGender: TDBEdit;
+    LblGender: TLabel;
+    DBAge: TDBEdit;
+    lblAge: TLabel;
     procedure btnOpenQueryClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
-  public
-    { Public declarations }
+    Function GetPathDataBase: String;
   end;
 
 var
@@ -56,32 +54,36 @@ uses DCache;
 procedure TForm3.btnOpenQueryClick(Sender: TObject);
 begin
   if TCache.GetInstance
-      .SetDataSet(False,QueryGrid)
-        .Compare(QueryGrid)
-          .IsModified then
-    begin
-      lblInfo.Caption:= 'Modified';
-      lblInfo.Font.Color:= clRed;
-      lblInfo.Repaint;
-      QueryGrid.Open();
-    end else
-    begin
-      lblInfo.Caption:= 'Not Modified';
-      lblInfo.Font.Color:= clBlack;
-      lblInfo.Repaint;
-    end;
+    .SetDataSet(False,QueryGrid)
+      .Compare(QueryGrid)
+        .IsModified then
+          begin
+            lblInfo.Caption:= 'Modified';
+            lblInfo.Font.Color:= clRed;
+            lblInfo.Repaint;
+            QueryGrid.Open();
+          end else
+          begin
+            lblInfo.Caption:= 'Not Modified';
+            lblInfo.Font.Color:= clBlack;
+            lblInfo.Repaint;
+          end;
 end;
 
 
 procedure TForm3.FormCreate(Sender: TObject);
 begin
-  if not FileExists(ExtractFilePath(ParamStr(0))+ 'Data/DB.db') then  raise Exception.Create('DataBase not Found');
-
-  Connection.Params.Database:= ExtractFilePath(ParamStr(0))+ 'Data/DB.db';
+  Connection.Params.Database:= GetPathDataBase;
   Connection.Connected:= True;
   QueryGrid.Open();
+  TCache.GetInstance.SetDataSet(True, QueryGrid);
+end;
 
-  TCache.GetInstance.SetDataSet(True,QueryGrid);
+function TForm3.GetPathDataBase: String;
+begin
+  if not FileExists(ExtractFilePath(ParamStr(0))+ 'Data/DB.db') then
+    raise Exception.Create('DataBase not Found');
+  result:= ExtractFilePath(ParamStr(0))+ 'Data/DB.db';
 end;
 
 end.

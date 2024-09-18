@@ -85,7 +85,7 @@ end;
 
 class function TCache.GetInstance: TCache;
 begin
-  if Cache =  nil then
+  if Cache =  Nil then
     Cache:= TCache.Create;
   result:= Cache;
 end;
@@ -118,9 +118,7 @@ initialization
 
 finalization
   if TCache <> nil then
-     TCache.GetInstance.Free;
-
-
+     TCache.GetInstance.Free; 
 end.
 
 
