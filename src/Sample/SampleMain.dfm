@@ -1,6 +1,7 @@
 object Form3: TForm3
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'DCache - Cache for DataSet '
   ClientHeight = 645
   ClientWidth = 878
@@ -1399,7 +1400,7 @@ object Form3: TForm3
     ParentFont = False
   end
   object ImgRAD: TImage
-    Left = 569
+    Left = 561
     Top = 56
     Width = 144
     Height = 127
@@ -16645,13 +16646,14 @@ object Form3: TForm3
         item
           Expanded = False
           FieldName = 'id'
+          Title.Caption = 'Id'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nome'
           Title.Caption = 'Name'
-          Width = 282
+          Width = 414
           Visible = True
         end
         item

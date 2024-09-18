@@ -1,3 +1,9 @@
+{
+  Name: João Bosco dos Reis Becker
+  Date:18/09/2024
+  Developed by https://github.com/BoscoBecker
+}
+
 unit DCache;
 
 interface
@@ -15,11 +21,11 @@ Type
     procedure SetModified(const Value: boolean);
     procedure SetHashData(const Value: String);
   public
+    class function SetDataSet(Const StoreHash: Boolean; DataSet: TDataSet) :TCache; static;
+    class function Compare(DataSet: TDataSet) :TCache; static;
+    class function GetInstance : TCache; static;
     function CalculatetHash(DataSet: TDataSet): String;
-    class function SetDataSet(Const StoreHash: Boolean; DataSet: TDataSet) :TCache;
     function IsModified: boolean;
-    class function Compare(DataSet: TDataSet) :TCache;
-    class function GetInstance : TCache;
     property Modified: boolean read IsModified write SetModified default False;
     property HashData: String read FHashData write SetHashData;
   end;
@@ -29,13 +35,12 @@ implementation
 { TCache }
 
 function TCache.CalculatetHash(DataSet: TDataSet): String;
-var
-  DataString: TStringBuilder;
 begin
-  if not DataSet.Active  then raise Exception.Create('Dataset is not active');
+  if not DataSet.Active then raise Exception.Create('Dataset is not active');
   if DataSet.IsEmpty  then Exit;
+
+  var DataString:= TStringBuilder.Create;
   try
-    DataString:= TStringBuilder.Create;
     DataString.Clear;
     DataSet.DisableControls;
     try
