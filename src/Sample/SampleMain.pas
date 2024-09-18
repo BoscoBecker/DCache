@@ -11,24 +11,31 @@ uses
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Stan.Param,
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Vcl.StdCtrls, Vcl.Mask,
   Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, FireDAC.Comp.DataSet,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
 
 type
   TForm3 = class(TForm)
     Connection: TFDConnection;
     dsGrid: TDataSource;
     QueryGrid: TFDQuery;
-    DBGrid: TDBGrid;
-    DBNavigator: TDBNavigator;
-    DBName: TDBEdit;
-    Nome: TLabel;
-    btnOpenQuery: TButton;
-    lblInfo: TLabel;
     ImgDataSet: TImage;
     Label1: TLabel;
     ImgRAD: TImage;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
+    Image1: TImage;
+    GroupBox1: TGroupBox;
+    Nome: TLabel;
+    lblInfo: TLabel;
+    DBGrid: TDBGrid;
+    DBNavigator: TDBNavigator;
+    DBName: TDBEdit;
+    btnOpenQuery: TButton;
+    DBEdit1: TDBEdit;
+    Label5: TLabel;
+    DBEdit2: TDBEdit;
+    Label6: TLabel;
     procedure btnOpenQueryClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private

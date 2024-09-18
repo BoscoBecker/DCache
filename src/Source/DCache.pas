@@ -1,3 +1,11 @@
+{
+  Name: João Bosco dos Reis Becker
+  Date:18/09/2024
+  Developed by https://github.com/BoscoBecker
+
+}
+
+
 unit DCache;
 
 interface
@@ -16,8 +24,8 @@ Type
     procedure SetHashData(const Value: String);
   public
     function CalculatetHash(DataSet: TDataSet): String;
-    class function SetDataSet(Const StoreHash: Boolean; DataSet: TDataSet) :TCache;
     function IsModified: boolean;
+    class function SetDataSet(Const StoreHash: Boolean; DataSet: TDataSet) :TCache;
     class function Compare(DataSet: TDataSet) :TCache;
     class function GetInstance : TCache;
     property Modified: boolean read IsModified write SetModified default False;
