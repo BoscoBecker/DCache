@@ -1,10 +1,13 @@
-
-![image](https://github.com/user-attachments/assets/faaef840-76ee-4ca2-881b-2c87865523d5)
-
-
+![image](https://github.com/user-attachments/assets/65b918d8-ede9-4771-9961-77c89336f6bb)
 
 ## 📖 Description
+Idea found here https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match
+
 The purpose of using DCache is to perform queries on the database only if there is a change in the data set.
+Explanation: every time the information "Not modified" is displayed, it means that there was no search in the database, and when it displays "Modified", it actually performed the search in the database.
+As shown below
+
+![image](https://github.com/user-attachments/assets/4fcb93e4-33f2-4413-b4e9-a154202e8829)
 
 ## 🛠️ The Class
 
@@ -30,13 +33,14 @@ Type
   end;
 ```
 
-## ✅ Starting and SetDataSet 
+### ✅ Starting and SetDataSet 
 ``` pascal
-
- TCache.GetInstance.SetDataSet(True,QueryGrid);
+Begin
+  TCache.GetInstance.SetDataSet(True,QueryGrid);
+End;
 
 ```
-## ✅ Checking if there was a change in the data set, if there was, perform the query, otherwise, it does nothing.
+### ✅ Checking if there was a change in the data set, if there was, perform the query, otherwise, it does nothing.
 ``` pascal
 
    if TCache.GetInstance
@@ -45,9 +49,6 @@ Type
           .IsModified then
 
 ```
-
-
-
  
 
 ## 💬 Contributions / Ideas / Bug Fixes
