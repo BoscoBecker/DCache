@@ -16673,6 +16673,7 @@ object Form3: TForm3
       Height = 25
       DataSource = dsGrid
       TabOrder = 1
+      BeforeAction = DBNavigatorBeforeAction
     end
     object DBName: TDBEdit
       Left = 56

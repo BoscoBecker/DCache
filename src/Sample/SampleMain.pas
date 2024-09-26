@@ -38,8 +38,10 @@ type
     lblAge: TLabel;
     procedure btnOpenQueryClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBNavigatorBeforeAction(Sender: TObject; Button: TNavigateBtn);
   private
     Function GetPathDataBase: String;
+    procedure OpenQueryDCache;
   end;
 
 var
@@ -53,23 +55,20 @@ uses DCache;
 
 procedure TForm3.btnOpenQueryClick(Sender: TObject);
 begin
-  if TCache.GetInstance
-    .SetDataSet(False,QueryGrid)
-      .Compare(QueryGrid)
-        .IsModified then
-          begin
-            lblInfo.Caption:= 'Modified';
-            lblInfo.Font.Color:= clRed;
-            lblInfo.Repaint;
-            QueryGrid.Open();
-          end else
-          begin
-            lblInfo.Caption:= 'Not Modified';
-            lblInfo.Font.Color:= clBlack;
-            lblInfo.Repaint;
-          end;
+  OpenQueryDCache;
 end;
 
+
+procedure TForm3.DBNavigatorBeforeAction(Sender: TObject; Button: TNavigateBtn);
+begin
+  case button of
+    nbRefresh:
+              begin
+                OpenQueryDCache;
+                Abort;
+              end;
+  end;
+end;
 
 procedure TForm3.FormCreate(Sender: TObject);
 begin
@@ -87,6 +86,24 @@ begin
   if not FileExists(ExtractFilePath(ParamStr(0))+ 'Data/DB.db') then
     raise Exception.Create('DataBase not Found');
   result:= ExtractFilePath(ParamStr(0))+ 'Data/DB.db';
+end;
+
+procedure TForm3.OpenQueryDCache;
+begin
+  if TCache.GetInstance
+      .Compare(QueryGrid)
+        .IsModified then
+          begin
+            lblInfo.Caption:= 'Modified';
+            lblInfo.Font.Color:= clRed;
+            lblInfo.Repaint;
+            QueryGrid.Open();
+          end else
+          begin
+            lblInfo.Caption:= 'Not Modified';
+            lblInfo.Font.Color:= clBlack;
+            lblInfo.Repaint;
+          end;
 end;
 
 end.

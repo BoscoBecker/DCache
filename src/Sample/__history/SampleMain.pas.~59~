@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Stan.Param,
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Vcl.StdCtrls, Vcl.Mask,
   Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, FireDAC.Comp.DataSet,
-  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.WinXCtrls;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
 
 type
   TForm3 = class(TForm)
@@ -38,8 +38,10 @@ type
     lblAge: TLabel;
     procedure btnOpenQueryClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBNavigatorBeforeAction(Sender: TObject; Button: TNavigateBtn);
   private
     Function GetPathDataBase: String;
+    procedure OpenQueryDCache;
   end;
 
 var
@@ -53,8 +55,53 @@ uses DCache;
 
 procedure TForm3.btnOpenQueryClick(Sender: TObject);
 begin
+  OpenQueryDCache;
+end;
+
+
+procedure TForm3.DBNavigatorBeforeAction(Sender: TObject; Button: TNavigateBtn);
+begin
+  case button of
+    nbFirst: ;
+    nbPrior: ;
+    nbNext: ;
+    nbLast: ;
+    nbInsert: ;
+    nbDelete: ;
+    nbEdit: ;
+    nbPost: ;
+    nbCancel: ;
+    nbRefresh:
+    begin
+      OpenQueryDCache;
+      Exit;
+    end;
+    nbApplyUpdates: ;
+    nbCancelUpdates: ;
+  end;
+end;
+
+procedure TForm3.FormCreate(Sender: TObject);
+begin
+  Connection.Params.Database:= GetPathDataBase;
+  Connection.Connected:= True;
+  QueryGrid.Open();
+
+  TCache
+    .GetInstance
+      .SetDataSet(True, QueryGrid);
+end;
+
+function TForm3.GetPathDataBase: String;
+begin
+  if not FileExists(ExtractFilePath(ParamStr(0))+ 'Data/DB.db') then
+    raise Exception.Create('DataBase not Found');
+  result:= ExtractFilePath(ParamStr(0))+ 'Data/DB.db';
+end;
+
+procedure TForm3.OpenQueryDCache;
+begin
   if TCache.GetInstance
-    .SetDataSet(False,QueryGrid)
       .Compare(QueryGrid)
         .IsModified then
           begin
@@ -68,22 +115,6 @@ begin
             lblInfo.Font.Color:= clBlack;
             lblInfo.Repaint;
           end;
-end;
-
-
-procedure TForm3.FormCreate(Sender: TObject);
-begin
-  Connection.Params.Database:= GetPathDataBase;
-  Connection.Connected:= True;
-  QueryGrid.Open();
-  TCache.GetInstance.SetDataSet(True, QueryGrid);
-end;
-
-function TForm3.GetPathDataBase: String;
-begin
-  if not FileExists(ExtractFilePath(ParamStr(0))+ 'Data/DB.db') then
-    raise Exception.Create('DataBase not Found');
-  result:= ExtractFilePath(ParamStr(0))+ 'Data/DB.db';
 end;
 
 end.

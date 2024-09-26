@@ -1,6 +1,7 @@
 object Form3: TForm3
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'DCache - Cache for DataSet '
   ClientHeight = 645
   ClientWidth = 878
@@ -1399,7 +1400,7 @@ object Form3: TForm3
     ParentFont = False
   end
   object ImgRAD: TImage
-    Left = 569
+    Left = 561
     Top = 56
     Width = 144
     Height = 127
@@ -16538,7 +16539,7 @@ object Form3: TForm3
     Left = 721
     Top = -14
     Width = 48
-    Height = 225
+    Height = 212
     Caption = '}'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -16570,10 +16571,6 @@ object Form3: TForm3
     Align = alClient
     Caption = 'Add new name or remove'
     TabOrder = 0
-    ExplicitLeft = 278
-    ExplicitTop = 366
-    ExplicitWidth = 185
-    ExplicitHeight = 105
     object Nome: TLabel
       Left = 16
       Top = 33
@@ -16588,8 +16585,8 @@ object Form3: TForm3
       ParentFont = False
     end
     object lblInfo: TLabel
-      Left = 640
-      Top = 32
+      Left = 608
+      Top = 27
       Width = 97
       Height = 21
       Caption = 'Not Modified'
@@ -16602,7 +16599,7 @@ object Form3: TForm3
       ParentColor = False
       ParentFont = False
     end
-    object Label5: TLabel
+    object LblGender: TLabel
       Left = 288
       Top = 33
       Width = 42
@@ -16615,7 +16612,7 @@ object Form3: TForm3
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label6: TLabel
+    object lblAge: TLabel
       Left = 462
       Top = 33
       Width = 22
@@ -16645,13 +16642,14 @@ object Form3: TForm3
         item
           Expanded = False
           FieldName = 'id'
+          Title.Caption = 'Id'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nome'
           Title.Caption = 'Name'
-          Width = 282
+          Width = 414
           Visible = True
         end
         item
@@ -16675,6 +16673,7 @@ object Form3: TForm3
       Height = 25
       DataSource = dsGrid
       TabOrder = 1
+      OnClick = DBNavigatorClick
     end
     object DBName: TDBEdit
       Left = 56
@@ -16695,7 +16694,7 @@ object Form3: TForm3
       TabOrder = 3
       OnClick = btnOpenQueryClick
     end
-    object DBEdit1: TDBEdit
+    object DBGender: TDBEdit
       Left = 336
       Top = 30
       Width = 81
@@ -16707,7 +16706,7 @@ object Form3: TForm3
       ShowHint = True
       TabOrder = 4
     end
-    object DBEdit2: TDBEdit
+    object DBAge: TDBEdit
       Left = 490
       Top = 30
       Width = 81

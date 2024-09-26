@@ -32,14 +32,16 @@ type
     DBNavigator: TDBNavigator;
     DBName: TDBEdit;
     btnOpenQuery: TButton;
-    DBEdit1: TDBEdit;
-    Label5: TLabel;
-    DBEdit2: TDBEdit;
-    Label6: TLabel;
+    DBGender: TDBEdit;
+    LblGender: TLabel;
+    DBAge: TDBEdit;
+    lblAge: TLabel;
     procedure btnOpenQueryClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBNavigatorBeforeAction(Sender: TObject; Button: TNavigateBtn);
   private
     Function GetPathDataBase: String;
+    procedure OpenQueryDCache;
   end;
 
 var
@@ -53,23 +55,31 @@ uses DCache;
 
 procedure TForm3.btnOpenQueryClick(Sender: TObject);
 begin
-  if TCache.GetInstance
-      .SetDataSet(False,QueryGrid)
-        .Compare(QueryGrid)
-          .IsModified then
-            begin
-              lblInfo.Caption:= 'Modified';
-              lblInfo.Font.Color:= clRed;
-              lblInfo.Repaint;
-              QueryGrid.Open();
-            end else
-            begin
-              lblInfo.Caption:= 'Not Modified';
-              lblInfo.Font.Color:= clBlack;
-              lblInfo.Repaint;
-            end;
+  OpenQueryDCache;
 end;
 
+
+procedure TForm3.DBNavigatorBeforeAction(Sender: TObject; Button: TNavigateBtn);
+begin
+  case button of
+    nbFirst: ;
+    nbPrior: ;
+    nbNext: ;
+    nbLast: ;
+    nbInsert: ;
+    nbDelete: ;
+    nbEdit: ;
+    nbPost: ;
+    nbCancel: ;
+    nbRefresh:
+    begin
+      OpenQueryDCache;
+      Break;
+    end;
+    nbApplyUpdates: ;
+    nbCancelUpdates: ;
+  end;
+end;
 
 procedure TForm3.FormCreate(Sender: TObject);
 begin
@@ -77,7 +87,9 @@ begin
   Connection.Connected:= True;
   QueryGrid.Open();
 
-  TCache.GetInstance.SetDataSet(True,QueryGrid);
+  TCache
+    .GetInstance
+      .SetDataSet(True, QueryGrid);
 end;
 
 function TForm3.GetPathDataBase: String;
@@ -85,6 +97,24 @@ begin
   if not FileExists(ExtractFilePath(ParamStr(0))+ 'Data/DB.db') then
     raise Exception.Create('DataBase not Found');
   result:= ExtractFilePath(ParamStr(0))+ 'Data/DB.db';
+end;
+
+procedure TForm3.OpenQueryDCache;
+begin
+  if TCache.GetInstance
+      .Compare(QueryGrid)
+        .IsModified then
+          begin
+            lblInfo.Caption:= 'Modified';
+            lblInfo.Font.Color:= clRed;
+            lblInfo.Repaint;
+            QueryGrid.Open();
+          end else
+          begin
+            lblInfo.Caption:= 'Not Modified';
+            lblInfo.Font.Color:= clBlack;
+            lblInfo.Repaint;
+          end;
 end;
 
 end.

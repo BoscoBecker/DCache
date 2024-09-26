@@ -32,10 +32,10 @@ type
     DBNavigator: TDBNavigator;
     DBName: TDBEdit;
     btnOpenQuery: TButton;
-    DBEdit1: TDBEdit;
-    Label5: TLabel;
-    DBEdit2: TDBEdit;
-    Label6: TLabel;
+    DBGender: TDBEdit;
+    LblGender: TLabel;
+    DBAge: TDBEdit;
+    lblAge: TLabel;
     procedure btnOpenQueryClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -54,7 +54,6 @@ uses DCache;
 procedure TForm3.btnOpenQueryClick(Sender: TObject);
 begin
   if TCache.GetInstance
-    .SetDataSet(False,QueryGrid)
       .Compare(QueryGrid)
         .IsModified then
           begin
@@ -76,7 +75,10 @@ begin
   Connection.Params.Database:= GetPathDataBase;
   Connection.Connected:= True;
   QueryGrid.Open();
-  TCache.GetInstance.SetDataSet(True, QueryGrid);
+
+  TCache
+    .GetInstance
+      .SetDataSet(True, QueryGrid);
 end;
 
 function TForm3.GetPathDataBase: String;

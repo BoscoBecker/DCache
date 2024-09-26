@@ -20,6 +20,7 @@ Type
     FHashCache: String;
     procedure SetModified(const Value: boolean);
     procedure SetHashData(const Value: String);
+    procedure SetHashCache(const Value: string);
   public
     class function SetDataSet(Const StoreHash: Boolean; DataSet: TDataSet) :TCache; static;
     class function Compare(DataSet: TDataSet) :TCache; static;
@@ -28,6 +29,7 @@ Type
     function IsModified: boolean;
     property Modified: boolean read IsModified write SetModified default False;
     property HashData: String read FHashData write SetHashData;
+    property HashCache: string read FHashCache write SetHashCache;
   end;
 
 implementation
@@ -35,13 +37,11 @@ implementation
 { TCache }
 
 function TCache.CalculatetHash(DataSet: TDataSet): String;
-var
-  LDataString: TStringBuilder;
 begin
   if not DataSet.Active then raise Exception.Create('Dataset is not active');
   if DataSet.IsEmpty  then Exit;
 
-  LDataString:= TStringBuilder.Create;
+  var LDataString:= TStringBuilder.Create;
   try
     LDataString.Clear;
     DataSet.DisableControls;
@@ -57,8 +57,7 @@ begin
       DataSet.EnableControls;
     end;
 
-    Result :=  THashSHA2.GetHashString(LDataString.ToString,SHA224);
-    FHashCache:= Result;
+    Result:=  SetHashCache(THashSHA2.GetHashString(LDataString.ToString,SHA224));
   finally
     LDataString.Free;
   end;
@@ -102,6 +101,11 @@ begin
     False:  Cache.CalculatetHash(DataSet);
   end;
   result:= Cache;
+end;
+
+procedure TCache.SetHashCache(const Value: string);
+begin
+  FHashCache := Value;
 end;
 
 procedure TCache.SetHashData(const Value: String);
