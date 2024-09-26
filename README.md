@@ -44,7 +44,6 @@ End;
 ``` pascal
 
    if TCache.GetInstance
-      .SetDataSet(False,QueryGrid)
         .Compare(QueryGrid)
           .IsModified then
 
